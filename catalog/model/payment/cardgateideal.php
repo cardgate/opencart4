@@ -16,9 +16,14 @@ namespace Opencart\Catalog\Model\Extension\Cardgate\Payment;
  * @copyright   Copyright (c) 2022 CardGate (http://www.cardgate.com)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
+
 class CardGateIdeal extends \Opencart\System\Engine\Model {
 
     public function getMethods( $address ) {
+        $currency       = $this->session->data['currency'];
+        $bCurrencyCheck = $currency == 'EUR';
+        if (!$bCurrencyCheck) return [];
+
         $this->load->language( 'extension/cardgate/payment/cardgateideal' );
 
         if ($this->cart->hasSubscription()) {

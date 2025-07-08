@@ -19,6 +19,9 @@ namespace Opencart\Catalog\Model\Extension\Cardgate\Payment;
 class CardGatePrzelewy extends \Opencart\System\Engine\Model {
 
     public function getMethods( $address ) {
+        $currency       = $this->session->data['currency'];
+        $bCurrencyCheck = $currency == 'PLN';
+        if (!$bCurrencyCheck) return [];
         $this->load->language( 'extension/cardgate/payment/cardgateprzelewy' );
 
         if ($this->cart->hasSubscription()) {

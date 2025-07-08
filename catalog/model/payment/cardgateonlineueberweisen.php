@@ -19,6 +19,10 @@ namespace Opencart\Catalog\Model\Extension\Cardgate\Payment;
 class CardGateOnlineueberweisen extends \Opencart\System\Engine\Model {
 
     public function getMethods( $address ) {
+        $currency       = $this->session->data['currency'];
+        $bCurrencyCheck = $currency == 'EUR';
+        if (!$bCurrencyCheck) return [];
+
         $this->load->language( 'extension/cardgate/payment/cardgateonlineueberweisen' );
 
         if ($this->cart->hasSubscription()) {
